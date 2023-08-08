@@ -27,16 +27,22 @@ h1 {
 
 .display {
     display: flex;
+    flex-direction: column;
     height: 80px;
     border: 2px solid rgba(129, 65, 0, 0.8);
     background-color: rgba(242, 181, 118, 0.36);
     flex:auto;
     margin-bottom: 10px;
-    justify-content: right;
+    justify-content: space-between;
     align-items: flex-end;
     color: rgba(129, 65, 0, 0.8);
     border-radius: 5%;
     font-weight: bold;
+}
+
+.history {
+    font-size: 12px;
+    margin: 4px 2px 0 0;
 }
 
 .display-text {

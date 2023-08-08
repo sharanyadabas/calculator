@@ -4,15 +4,15 @@ let operator = ''
 let result = ''
 let error = false
 let decimal = false
-const ROUND_ERROR = 1000000000
+const ROUND_ERROR = 10000
 
 const displayText = document.querySelector('.display-text')
 const buttonCE = document.querySelector('#clear')
 const buttonEquals = document.querySelector('#equals')
 const buttonDelete = document.querySelector('#delete')
+const buttonHistory = document.querySelector('.history')
 
 const buttons = document.querySelectorAll('button')
-console.log(buttons)
 let numbers = Array.from(buttons).slice(2,13)
 let operators = Array.from(buttons).slice(14,18)
 
@@ -36,7 +36,6 @@ numbers.forEach((button) => {
             num2 += button.textContent
             displayText.textContent = num2.toString()
         }
-        console.log(`num1: ${num1} num2: ${num2}`)
     }
 })
 
@@ -51,6 +50,7 @@ operators.forEach((button) => {
             if (num2 !== '')
                 equals()
             operator = button.textContent
+            buttonHistory.textContent = `${num1.toString()} ${operator} `
         }
     }
 })
@@ -62,6 +62,8 @@ buttonCE.onclick = () => reset()
 buttonEquals.onclick = () => {
     displayText.style.fontSize = "30px"
     if (num1 !== '' && num2 !== '' && operator !== '') {
+        if (!buttonHistory.textContent.includes('='))
+            buttonHistory.textContent += `${num2.toString()} =`
         equals()
     }
 }
@@ -81,7 +83,6 @@ function equals() {
     operators.forEach((button) => button.classList.remove('toggled'))
     decimal = false
     result = operate(num1, num2)
-    console.log(`num1: ${num1} num2: ${num2} operator: ${operator} result: ${result}`)
     if (result.toString().length > 12) {
         reset()
         displayText.textContent = "Overflow Error"
@@ -100,6 +101,7 @@ function reset() {
     decimal = false
     error = false
     displayText.style.fontSize = "30px"
+    buttonHistory.textContent = ''
     num1 = ''
     num2 = ''
     operator = ''
@@ -123,7 +125,7 @@ function divide(num1, num2) {
     if (num2 === 0) {
         reset()
         displayText.textContent = "Can't divide by zero!"
-        displayText.style.fontSize = "22px"
+        displayText.style.fontSize = "20px"
         error = true
         return ''
     }
