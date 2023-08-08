@@ -4,7 +4,7 @@ let operator = ''
 let result = ''
 let error = false
 let decimal = false
-const ROUND_ERROR = 10000000000
+const ROUND_ERROR = 1000000000
 
 const displayText = document.querySelector('.display-text')
 const buttonCE = document.querySelector('#clear')
