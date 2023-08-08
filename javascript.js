@@ -4,6 +4,7 @@ let operator = ''
 let result = ''
 let error = false
 let decimal = false
+const ROUND_ERROR = 10000000000
 
 const displayText = document.querySelector('.display-text')
 const buttonCE = document.querySelector('#clear')
@@ -22,18 +23,20 @@ numbers.forEach((button) => {
         if (button.textContent === '.' && decimal) {
             //do nothing
         }
-        else if (operator === '' ) {
+        else if (operator === '' && num1.length < 12) {
             if (button.textContent === '.')
                 decimal = true
             num1 += button.textContent
             displayText.textContent = num1.toString()
         }
-        else {
+        else if (operator !== '' && num2.length < 12) {
+            operators.forEach((button) => button.classList.remove('toggled'))
             if (button.textContent === '.')
                 decimal = true
             num2 += button.textContent
             displayText.textContent = num2.toString()
         }
+        console.log(`num1: ${num1} num2: ${num2}`)
     }
 })
 
@@ -41,6 +44,8 @@ numbers.forEach((button) => {
 //first two operands and stores result in num1
 operators.forEach((button) => {
     button.onclick = () => {
+        operators.forEach((button) => button.classList.remove('toggled'))
+        button.classList.add('toggled')
         decimal = false
         if (!error) {
             if (num2 !== '')
@@ -73,6 +78,7 @@ buttonDelete.onclick = () => {
 }
 
 function equals() {
+    operators.forEach((button) => button.classList.remove('toggled'))
     decimal = false
     result = operate(num1, num2)
     console.log(`num1: ${num1} num2: ${num2} operator: ${operator} result: ${result}`)
@@ -90,6 +96,7 @@ function equals() {
 }
 
 function reset() {
+    operators.forEach((button) => button.classList.remove('toggled'))
     decimal = false
     error = false
     displayText.style.fontSize = "30px"
@@ -109,7 +116,7 @@ function subtract(num1, num2) {
 }
 
 function multiply(num1, num2) {
-    return num1 * num2
+    return Math.round(num1 * num2 * ROUND_ERROR) / ROUND_ERROR
 }
 
 function divide(num1, num2) {
@@ -121,7 +128,7 @@ function divide(num1, num2) {
         return ''
     }
     else
-        return Math.round((num1 / num2) * 10**5) / 10**5
+        return Math.round((num1 / num2) * ROUND_ERROR) / ROUND_ERROR
 }
 
 function operate(num1, num2) {

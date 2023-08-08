@@ -1,25 +1,48 @@
-.container {
+body {
+    font-family: Gill Sans, sans-serif;
+    background-color: rgba(242, 181, 118, 0.36);
+}
+
+h1 {
+    font-size: 50px;
+    margin: 30px auto;
+    color: rgba(129, 65, 0, 0.8);
+    -webkit-text-stroke: 0.5px black;
+    font-style: oblique;
+    text-align: center;
+}
+
+#container {
     display:flex;
     flex-direction: column;
-    width: 200px;
+    width: 220px;
     height: 300px;
-    border: 1px solid black;
     padding: 10px;
+    margin: 0 auto 20px;
+    box-shadow: 6px 10px rgba(130, 65, 0, 0.4);
+    background-color: white;
+    border: 3px solid rgba(129, 65, 0, 0.8);
+    border-radius: 5%;
 }
 
 .display {
     display: flex;
     height: 80px;
-    border: 1px solid black;
+    border: 2px solid rgba(129, 65, 0, 0.8);
+    background-color: rgba(242, 181, 118, 0.36);
     flex:auto;
     margin-bottom: 10px;
     justify-content: right;
     align-items: flex-end;
+    color: rgba(129, 65, 0, 0.8);
+    border-radius: 5%;
+    font-weight: bold;
 }
 
 .display-text {
     font-size: 30px;
     margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 .col1, .col2, .col3, .col4 {
@@ -46,10 +69,30 @@
 
 button {
     flex:auto;
+    border-radius: 20%;
+    background-color: rgba(242, 181, 118, 0.36);
+    color: rgba(129, 65, 0, 0.8);
+    border: 2px solid rgba(129, 65, 0, 0.8);
+    font-weight: bold;
+    transition: all 0.4s;
+    font-size: 16px;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.toggled {
+    background-color: rgba(129, 65, 0, 0.8);
+    color: white;
 }
 
 .col1, .col2, .col3 {
     margin-right: 10px;
+}
+
+#clear, #delete{
+    border-radius: 10%;
 }
 
 #clear, #divide, #multiply, #subtract {
